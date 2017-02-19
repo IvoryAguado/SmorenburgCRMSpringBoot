@@ -1,0 +1,30 @@
+# config context path to "/" by setting an empty string
+server:
+  contextPath:
+  jpa:
+      hibernate:
+        # possible values: validate | update | create | create-drop
+        ddl-auto: create-drop
+  datasource:
+    url: jdbc:mysql://localhost/testdb
+    username: root
+    password: chesterfield
+    driver-class-name: com.mysql.jdbc.Driver
+  port: 80
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  routes:
+    adminendpoint: admin
+    apiendpoint: api
+    authentication:
+      authendpoint: auth
+      refreshendpoint: refresh
+
+# JACKSON
+spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
