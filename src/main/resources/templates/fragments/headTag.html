@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="headTag">
-<title>Single - Future Imperfect by HTML5 UP</title>
+    <title>Smorenburg CRM - Future Imperfect</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -15,8 +15,14 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ie/html5shiv.js"></script>
     <script src="assets/js/ie/respond.min.js"></script>
+
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
     <!--Main CSS-->
     <link rel="stylesheet" href="assets/css/main.css"/>
     <!--[if lte IE 9]>

@@ -12,6 +12,9 @@ server:
     driver-class-name: com.mysql.jdbc.Driver
   port: 80
 
+crm:
+  name: Smorenburg CRM
+
 jwt:
   header: Authorization
   secret: mySecret

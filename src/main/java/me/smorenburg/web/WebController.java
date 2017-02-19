@@ -1,8 +1,9 @@
 package me.smorenburg.web;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.*;
@@ -11,16 +12,15 @@ import org.thymeleaf.spring4.view.ThymeleafView;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import java.time.LocalDateTime;
-
 @Controller
 @EnableWebMvc
 public class WebController extends WebMvcConfigurerAdapter {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/META-INF/resources/",
             "classpath:/resources/",
             "classpath:/static/"};
+    @Value("${crm.name}")
+    private String crmName;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -32,24 +32,48 @@ public class WebController extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("/results").setViewName("results");
-        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/form").setViewName("form");
+//        registry.addViewController("/results").setViewName("results");
+//        registry.addViewController("/login").setViewName("login");
+//        registry.addViewController("/form").setViewName("form");
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model) {
-        model.addAttribute("now", LocalDateTime.now());
-        return "index";
-    }
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(Model model) {
-        model.addAttribute("now", LocalDateTime.now());
+    public String index(ExtendedModelMap model) {
         return "redirect:/";
     }
-     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String root(Model model) {
-        model.addAttribute("now", LocalDateTime.now());
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String root(ExtendedModelMap model) {
+        model.addAttribute("contentView", "/pageviews/landing");
+        model.addAttribute("crmName", crmName);
+        return "index";
+    }
+
+    @RequestMapping(value = "/projects", method = RequestMethod.GET)
+    public String projects(ExtendedModelMap model) {
+        model.addAttribute("crmName", crmName);
+        model.addAttribute("contentView", "/pageviews/projects");
+        return "index";
+    }
+
+    @RequestMapping(value = "/team", method = RequestMethod.GET)
+    public String team(ExtendedModelMap model) {
+        model.addAttribute("crmName", crmName);
+        model.addAttribute("contentView", "/pageviews/team");
+        return "index";
+    }
+
+    @RequestMapping(value = "/services", method = RequestMethod.GET)
+    public String services(ExtendedModelMap model) {
+        model.addAttribute("crmName", crmName);
+        model.addAttribute("contentView", "/pageviews/services");
+        return "index";
+    }
+
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
+    public String contact(ExtendedModelMap model) {
+        model.addAttribute("crmName", crmName);
+        model.addAttribute("contentView", "/pageviews/contact");
         return "index";
     }
 
@@ -76,5 +100,9 @@ public class WebController extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(
             DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    class SmorenburgCRMModelView extends ExtendedModelMap {
+
     }
 }

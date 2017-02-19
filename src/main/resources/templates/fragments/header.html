@@ -3,14 +3,13 @@
 <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
     <!-- Header -->
     <header id="header">
-        <h1><a href="/">SMORENBURG CRM</a></h1>
+        <h1><a th:text="${crmName}" href="/"></a></h1>
         <nav class="links">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="#">Prices</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#" th:href="@{/index}">Contact</a></li>
+                <li><a href="#" th:href="@{/services}">Services</a></li>
+                <li><a href="#" th:href="@{/projects}">Projects</a></li>
+                <li><a href="#" th:href="@{/team}">Team</a></li>
+                <li><a href="#" th:href="@{/contact}">Contact</a></li>
             </ul>
         </nav>
         <nav class="main">
@@ -30,49 +29,64 @@
     <!-- Menu -->
     <section id="menu">
 
-        <!-- Search -->
-        <section>
-            <form class="search" method="get" action="#">
-                <input type="text" name="query" placeholder="Search" />
-            </form>
-        </section>
+        <!--&lt;!&ndash; Search &ndash;&gt;-->
+        <!--<section>-->
+        <!--<form class="search" method="get" action="#">-->
+        <!--<input type="text" name="query" placeholder="Search"/>-->
+        <!--</form>-->
+        <!--</section>-->
 
         <!-- Links -->
         <section>
+
+        </section>
+        <section>
             <ul class="links">
                 <li>
-                    <a href="#">
-                        <h3>Lorem ipsum</h3>
-                        <p>Feugiat tempus veroeros dolor</p>
-                    </a>
+                    <div>
+                        <h3>LOGIN</h3>
+                    </div>
                 </li>
                 <li>
-                    <a href="#">
-                        <h3>Dolor sit amet</h3>
-                        <p>Sed vitae justo condimentum</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <h3>Feugiat veroeros</h3>
-                        <p>Phasellus sed ultricies mi congue</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <h3>Etiam sed consequat</h3>
-                        <p>Porta lectus amet ultricies</p>
-                    </a>
+                    <div class="12u$">
+                        <input type="email" name="email" id="email" value="" placeholder="E-Mail"/>
+                    </div>
+                    <div class="12u$">
+                        <input type="password" name="password" id="password" value="" placeholder="Password"/>
+                    </div>
                 </li>
             </ul>
-        </section>
-
-        <!-- Actions -->
-        <section>
             <ul class="actions vertical">
                 <li><a href="#" class="button big fit">Log In</a></li>
             </ul>
         </section>
-
+        <section>
+            <ul class="links">
+                <li>
+                    <div>
+                        <h3>SIGN UP</h3>
+                    </div>
+                </li>
+                <li>
+                    <div class="12u$">
+                        <input type="email" name="reg-email" id="reg-email" value="" placeholder="E-Mail"/>
+                    </div>
+                    <div class="12u$">
+                        <input type="email" name="reg-confirm-email" id="reg-confirm-email" value=""
+                               placeholder="Confirm E-Mail"/>
+                    </div>
+                    <div class="12u$">
+                        <input type="password" name="reg-password" id="reg-password" value="" placeholder="Password"/>
+                    </div>
+                    <div class="12u$">
+                        <input type="password" name="reg-confirm-password" id="reg-confirm-password" value=""
+                               placeholder="Confirm Password"/>
+                    </div>
+                </li>
+            </ul>
+            <ul class="actions vertical">
+                <li><a href="#" class="button big fit">Sign Up</a></li>
+            </ul>
+        </section>
     </section>
 </div>
