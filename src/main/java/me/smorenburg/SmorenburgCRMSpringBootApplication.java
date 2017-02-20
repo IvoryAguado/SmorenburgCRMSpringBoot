@@ -18,6 +18,10 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 })
 public class SmorenburgCRMSpringBootApplication extends SpringBootServletInitializer {
 
+    public static void main(String[] args) {
+        SpringApplication.run(SmorenburgCRMSpringBootApplication.class, args);
+    }
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(SmorenburgCRMSpringBootApplication.class);
@@ -36,8 +40,5 @@ public class SmorenburgCRMSpringBootApplication extends SpringBootServletInitial
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(engine);
         return viewResolver;
-    }
-    public static void main(String[] args) {
-        SpringApplication.run(SmorenburgCRMSpringBootApplication.class, args);
     }
 }

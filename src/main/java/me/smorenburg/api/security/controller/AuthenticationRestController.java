@@ -1,6 +1,11 @@
 package me.smorenburg.api.security.controller;
 
 import me.smorenburg.api.security.JwtAuthenticationRequest;
+import me.smorenburg.api.security.JwtTokenUtil;
+import me.smorenburg.api.security.JwtUser;
+import me.smorenburg.api.security.model.ResponseApiError;
+import me.smorenburg.api.security.service.JwtAuthenticationResponse;
+import me.smorenburg.api.security.service.JwtUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
-import me.smorenburg.api.security.model.ResponseApiError;
-import me.smorenburg.api.security.JwtTokenUtil;
-import me.smorenburg.api.security.JwtUser;
-import me.smorenburg.api.security.service.JwtAuthenticationResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,7 +36,7 @@ public class AuthenticationRestController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private JwtUserDetailsServiceImpl userDetailsService;
 
     @RequestMapping(value = "${jwt.routes.authentication.authendpoint}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
@@ -58,7 +58,7 @@ public class AuthenticationRestController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @RequestMapping(value = "${jwt.routes.authentication.refreshendpoint}", method = RequestMethod.GET)
+    @RequestMapping(value = "${jwt.routes.authentication.authendpoint}/${jwt.routes.authentication.refreshendpoint}", method = RequestMethod.GET)
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);

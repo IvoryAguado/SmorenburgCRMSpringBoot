@@ -1,10 +1,16 @@
 package me.smorenburg.config;
 
+import me.smorenburg.api.security.JwtAuthenticationEntryPoint;
 import me.smorenburg.api.security.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
+import org.springframework.orm.hibernate5.HibernateExceptionTranslator;
+import org.springframework.orm.jpa.JpaDialect;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,10 +26,14 @@ import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.header.writers.XContentTypeOptionsHeaderWriter;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
-import me.smorenburg.api.security.JwtAuthenticationEntryPoint;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableWebSecurity
+@EnableTransactionManagement
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -32,6 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    @Resource
+    private Environment env;
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -89,12 +101,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js"
                 ).permitAll()
                 .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/**").authenticated()
                 .antMatchers("/beans/*").hasAnyRole("ROLE_ADMIN")
                 .antMatchers("/profile/*").hasAnyRole("ROLE_ADMIN")
                 .antMatchers("/users/*").hasAnyRole("ROLE_ADMIN")
                 .antMatchers("/profile/*").hasAnyRole("ROLE_ADMIN")
                 .anyRequest().denyAll();
-        ;
 
 //        httpSecurity.formLogin()
 //                .loginPage("/login.html")
@@ -115,6 +127,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().cacheControl();
 
 
+    }
 
+    @Bean
+    public HibernateExceptionTranslator hibernateExceptionTranslator() {
+        return new HibernateExceptionTranslator();
+    }
+
+
+    @Bean
+    @Autowired
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+
+        JpaTransactionManager txManager = new JpaTransactionManager();
+        JpaDialect jpaDialect = new HibernateJpaDialect();
+        txManager.setEntityManagerFactory(entityManagerFactory);
+        txManager.setJpaDialect(jpaDialect);
+        return txManager;
     }
 }
