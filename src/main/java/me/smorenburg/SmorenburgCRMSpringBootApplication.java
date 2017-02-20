@@ -41,4 +41,6 @@ public class SmorenburgCRMSpringBootApplication extends SpringBootServletInitial
         viewResolver.setTemplateEngine(engine);
         return viewResolver;
     }
+
+
 }

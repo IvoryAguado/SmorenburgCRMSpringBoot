@@ -12,11 +12,20 @@ public class ResponseApiError {
     private String message;
     private String path;
 
-    public ResponseApiError(Long timestamp, Integer status, String error, String exception, String message, String path) {
-        this.timestamp = timestamp;
-        this.status = status;
-        this.error = error;
-        this.exception = exception;
+    public ResponseApiError(Exception exception, String path) {
+        this.timestamp = System.currentTimeMillis();
+        this.status = 400;
+        this.error = "Bad Request";
+        this.exception = exception.getClass().getSimpleName();
+        this.message = exception.getMessage();
+        this.path = path;
+    }
+
+    public ResponseApiError(Exception exception, String message, String path) {
+        this.timestamp = System.currentTimeMillis();
+        this.status = 400;
+        this.error = "Bad Request";
+        this.exception = exception.getClass().getSimpleName();
         this.message = message;
         this.path = path;
     }

@@ -16,21 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 public class UsersRestController {
 
 
-
-    @RequestMapping(value = "/", method = RequestMethod.GET ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseApiError indesx(HttpServletRequest request) {
-        return new ResponseApiError(System.currentTimeMillis(), 404, "Not Found", "ResourceNotFound", "No message available", request.getServletPath());
-
+        throw new ResourceNotFoundException();
     }
 
     @RequestMapping(value = "beans/**", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseApiError getAutshentixcatfedUser(HttpServletRequest request) throws ResourceNotFoundException {
-        return new ResponseApiError(System.currentTimeMillis(), 404, "Not Found", "ResourceNotFound", "No message available", request.getServletPath());
+        throw new ResourceNotFoundException();
     }
 
     @RequestMapping(value = "beans", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseApiError getAutheantivcatedUser(HttpServletRequest request) {
-        return new ResponseApiError(System.currentTimeMillis(), 404, "Not Found", "ResourceNotFound", "No message available", request.getServletPath());
+        throw new ResourceNotFoundException();
     }
 
 
@@ -50,12 +48,12 @@ public class UsersRestController {
 
     @RequestMapping(value = "profile/**", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseApiError getAutshaentixcatfedUser(HttpServletRequest request) throws ResourceNotFoundException {
-        return new ResponseApiError(System.currentTimeMillis(), 404, "Not Found", "ResourceNotFound", "No message available", request.getServletPath());
+        throw new ResourceNotFoundException();
     }
 
     @RequestMapping(value = "profile", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseApiError getAutheasntivcatedUser(HttpServletRequest request) {
-        return new ResponseApiError(System.currentTimeMillis(), 404, "Not Found", "ResourceNotFound", "No message available", request.getServletPath());
+        throw new ResourceNotFoundException();
     }
 
 
@@ -75,12 +73,12 @@ public class UsersRestController {
 
     @RequestMapping(value = "users/**", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseApiError getAutshentixcatedUser(HttpServletRequest request) throws ResourceNotFoundException {
-        return new ResponseApiError(System.currentTimeMillis(), 404, "Not Found", "ResourceNotFound", "No message available", request.getServletPath());
+        throw new ResourceNotFoundException();
     }
 
     @RequestMapping(value = "users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseApiError getAutheanticatedUser(HttpServletRequest request) {
-        return new ResponseApiError(System.currentTimeMillis(), 404, "Not Found", "ResourceNotFound", "No message available", request.getServletPath());
+    public ResponseApiError getAutheanticatedUser(HttpServletRequest request) throws ResourceNotFoundException {
+        throw new ResourceNotFoundException();
     }
 
 
@@ -101,7 +99,7 @@ public class UsersRestController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseApiError> HttpMediaTypeNotAcceptableException(HttpServletRequest request, Exception e) {
-        return ResponseEntity.badRequest().body(new ResponseApiError(System.currentTimeMillis(), 400, "Bad Request", e.getClass().getSimpleName(), e.getMessage(), request.getServletPath()));
+        return ResponseEntity.badRequest().body(new ResponseApiError(e, request.getServletPath()));
     }
 
 }

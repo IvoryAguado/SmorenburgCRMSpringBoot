@@ -1,4 +1,4 @@
-package me.smorenburg.config;
+package me.smorenburg.web.config;
 
 import me.smorenburg.api.security.JwtAuthenticationEntryPoint;
 import me.smorenburg.api.security.JwtAuthenticationTokenFilter;

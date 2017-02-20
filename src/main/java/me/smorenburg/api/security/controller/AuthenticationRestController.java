@@ -74,11 +74,11 @@ public class AuthenticationRestController {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Object> rulesForHttpMessageNotReadableException(HttpServletRequest req, HttpMessageNotReadableException e) {
-        return ResponseEntity.badRequest().body(new ResponseApiError(System.currentTimeMillis(), 400, "Bad Request", e.getClass().getSimpleName(), e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
+        return ResponseEntity.badRequest().body(new ResponseApiError(e, e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<Object> HttpRequestMethodNotSupportedException(HttpServletRequest req, HttpMessageNotReadableException e) {
-        return ResponseEntity.badRequest().body(new ResponseApiError(System.currentTimeMillis(), 405, "Method Not Allowed", e.getClass().getSimpleName(), e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
+        return ResponseEntity.badRequest().body(new ResponseApiError(e, e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
     }
 }
