@@ -15,6 +15,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ie/html5shiv.js"></script>
     <script src="assets/js/ie/respond.min.js"></script>
+    <script src="assets/js/client.js"></script>
 
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
@@ -31,6 +32,22 @@
     <link rel="stylesheet" href="assets/css/ie8.css"/><![endif]-->
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <style type="text/css">
+   ::-webkit-scrollbar { display: none; }
+   .ui-content { -webkit-overflow-scrolling: touch; }
+       .text-hidden {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+       }
+       .text-shown {
+          word-wrap: break-word;
+       }
+
+
+
+    </style>
 </head>
 </html>
 

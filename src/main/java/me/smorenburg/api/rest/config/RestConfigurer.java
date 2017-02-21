@@ -1,5 +1,6 @@
 package me.smorenburg.api.rest.config;
 
+import me.smorenburg.api.rest.media.Media;
 import me.smorenburg.api.rest.persons.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,7 @@ public class RestConfigurer {
             @Override
             public void configureRepositoryRestConfiguration(
                     RepositoryRestConfiguration config) {
-                config.exposeIdsFor(Person.class);
+                config.exposeIdsFor(Person.class, Media.class);
             }
         };
 

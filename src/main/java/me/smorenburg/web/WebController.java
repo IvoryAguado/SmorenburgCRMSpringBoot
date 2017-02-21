@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
@@ -23,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @EnableWebMvc
+@Configuration
+@ComponentScan(basePackages = "com.websystique.springmvc")
 public class WebController extends WebMvcConfigurerAdapter {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
@@ -104,6 +108,7 @@ public class WebController extends WebMvcConfigurerAdapter {
         return result;
     }
 
+
     @Bean
     public ThymeleafViewResolver viewResolver(SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
@@ -145,4 +150,5 @@ public class WebController extends WebMvcConfigurerAdapter {
         }
 
     }
+
 }
