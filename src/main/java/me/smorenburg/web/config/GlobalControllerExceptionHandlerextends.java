@@ -3,14 +3,17 @@ package me.smorenburg.web.config;
 import me.smorenburg.api.security.model.ResponseApiError;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
+@RestControllerAdvice
 class GlobalControllerExceptionHandlerextends {
 
 
@@ -40,7 +43,18 @@ class GlobalControllerExceptionHandlerextends {
     }
 
 
-
+    @ExceptionHandler(TransactionSystemException.class)
+    public ResponseEntity<ResponseApiError> TransactionSystemException(HttpServletRequest request, TransactionSystemException e) {
+        StringBuilder localizedMessage = new StringBuilder();
+        for (ConstraintViolation<?> next : ((ConstraintViolationException) e.getOriginalException().getCause()).getConstraintViolations()) {
+            String propertyPath = next.getPropertyPath().toString().substring(0, 1).toUpperCase() + next.getPropertyPath().toString().substring(1);
+            localizedMessage.append(propertyPath)
+                    .append(": ")
+                    .append(next.getMessage())
+                    .append("\n ");
+        }
+        return ResponseEntity.badRequest().body(new ResponseApiError((Exception) e.getOriginalException(), localizedMessage.toString(), request.getServletPath()));
+    }
 //    @Override
 //    protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 //        return super.handleHttpMediaTypeNotAcceptable(ex, headers, status, request);

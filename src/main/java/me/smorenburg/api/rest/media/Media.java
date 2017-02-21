@@ -50,8 +50,13 @@ public class Media {
 
     @Column(name = "MIME_TYPE", length = 50)
     @NotNull
-    @Size(min = 4, max = 10)
+    @Size(min = 1, max = 50)
     private String mimeType;
+
+    @Column(name = "FILE_EXTENSION", length = 10)
+    @NotNull
+    @Size(min = 1, max = 10)
+    private String fileExtension;
 
     @Column(name = "CREATED_AT")
     @Temporal(TemporalType.TIMESTAMP)
@@ -67,18 +72,30 @@ public class Media {
 
     public Media(MultipartFile file, String url) {
         proccessMultiPartFile(file);
-        this.url = url + "download/" + getFileName();
+        this.url = url + "/download/" + getFileName();
     }
 
     private void proccessMultiPartFile(MultipartFile file) {
         mimeType = file.getContentType();
+
+        String extension = file.getOriginalFilename();
+        fileExtension = ".unknown";
+        if (extension.contains(".")) {
+            fileExtension = extension.substring(extension.lastIndexOf("."), extension.length());
+        }
+
         createAt = new Date(System.currentTimeMillis());
         localPath = Paths.get(new StorageProperties().getLocation(), file.getOriginalFilename()).toUri().getPath();
 //        url=Paths.get(new StorageProperties().getLocation(),file.getOriginalFilename()).toUri();
         fileName = nextFileStringIdId();
         title = file.getOriginalFilename();
-        new File(localPath).renameTo(new File(Paths.get(new StorageProperties().getLocation(), fileName + "." + mimeType.substring(mimeType.indexOf("/") + 1, mimeType.length())).toUri().getPath()));
-        localPath = Paths.get(new StorageProperties().getLocation(), fileName + "." + mimeType.substring(mimeType.indexOf("/") + 1, mimeType.length())).toUri().getPath();
+        new File(localPath).renameTo(new File(Paths.get(new StorageProperties().getLocation(), fileName
+                        + fileExtension
+                ).toUri().getPath())
+        );
+        localPath = Paths.get(new StorageProperties().getLocation(), fileName
+                + fileExtension
+        ).toUri().getPath();
 
     }
 
@@ -148,5 +165,13 @@ public class Media {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public String getFileExtension() {
+        return fileExtension;
+    }
+
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
     }
 }
