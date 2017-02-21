@@ -176,13 +176,14 @@ $(function () {
      if (getJwtToken()) {
         $login.hide();
         $loginForm.hide();
+        $signUp.hide();
         $notLoggedIn.hide();
         showTokenInformation();
         showUserInformation();
     }
      $('#loginErrorModal')
-                            .modal("show")
-                            .find(".modal-body")
-                            .empty()
-                            .html("<p>fgfgsgfsdgfsdfg</p>");
+     .modal("show")
+     .find(".modal-body")
+     .empty()
+     .html("<p>fgfgsgfsdgfsdfg</p>");
  });
