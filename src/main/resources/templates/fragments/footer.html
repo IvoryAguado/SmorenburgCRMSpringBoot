@@ -3,13 +3,16 @@
      <!-- Footer -->
      <section style="text-align:center" id="footer" th:fragment="footer">
         <ul class="icons">
-            <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
-            <li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+            <li><a th:href="${crmTwitterLink}" href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a th:href="${crmFacebookLink}" href="#" class="fa-facebook"><span class="label">Facebook</span></a>
+            </li>
+            <li><a th:href="${crmInstagramLink}" href="#" class="fa-instagram"><span class="label">Instagram</span></a>
+            </li>
+            <li><a th:href="${crmRssLink}" href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+            <li><a th:href="${crmEmailLink}" href="#" class="fa-envelope"><span class="label">Email</span></a></li>
         </ul>
-        <p class="copyright">&copy; <a href="http://www.smorenburg.me">Smorenburg Technologies</a>.</p>
+         <p class="copyright">&copy; <a th:text="${crmCopyRight}" th:href="${crmCopyRightLink}"
+                                        href="http://www.smorenburg.me"></a>.</p>
     </section>
  </body>
 </html>

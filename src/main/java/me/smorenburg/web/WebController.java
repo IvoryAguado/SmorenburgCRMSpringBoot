@@ -36,6 +36,27 @@ public class WebController extends WebMvcConfigurerAdapter {
     @Value("${crm.name}")
     private String crmName;
 
+    @Value("${crm.copyright}")
+    private String crmCopyRight;
+
+    @Value("${crm.copyright.link}")
+    private String crmCopyRightLink;
+
+    @Value("${crm.social.twitter.link}")
+    private String crmTwitterLink;
+
+    @Value("${crm.social.facebook.link}")
+    private String crmFacebookLink;
+
+    @Value("${crm.social.instagram.link}")
+    private String crmInstagramLink;
+
+    @Value("${crm.social.rss.link}")
+    private String crmRssLink;
+
+    @Value("${crm.social.email.link}")
+    private String crmEmailLink;
+
 
     @Autowired
     private
@@ -134,6 +155,15 @@ public class WebController extends WebMvcConfigurerAdapter {
         public boolean preHandle(HttpServletRequest request,
                                  HttpServletResponse response, Object handler) throws Exception {
             request.setAttribute("crmName", crmName);
+            request.setAttribute("crmCopyRight", crmCopyRight);
+            request.setAttribute("crmEmailLink", crmEmailLink);
+            request.setAttribute("crmRssLink", crmRssLink);
+            request.setAttribute("crmInstagramLink", crmInstagramLink);
+            request.setAttribute("crmFacebookLink", crmFacebookLink);
+            request.setAttribute("crmTwitterLink", crmTwitterLink);
+            request.setAttribute("crmFacebookLink", crmFacebookLink);
+            request.setAttribute("crmCopyRightLink", crmCopyRightLink);
+
             return true;
         }
 
