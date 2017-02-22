@@ -179,7 +179,6 @@ public class WebController extends WebMvcConfigurerAdapter {
             request.setAttribute("crmInstagramLink", crmInstagramLink);
             request.setAttribute("crmFacebookLink", crmFacebookLink);
             request.setAttribute("crmTwitterLink", crmTwitterLink);
-            request.setAttribute("crmFacebookLink", crmFacebookLink);
 
             request.setAttribute("crmAddressRoad", crmAddressRoad);
             request.setAttribute("crmAddressCity", crmAddressCity);
