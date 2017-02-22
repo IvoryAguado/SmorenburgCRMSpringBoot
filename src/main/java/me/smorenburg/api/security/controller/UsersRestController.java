@@ -98,7 +98,7 @@ public class UsersRestController {
 
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ResponseApiError> HttpMediaTypeNotAcceptableException(HttpServletRequest request, Exception e) {
+    public ResponseEntity<ResponseApiError> httpMediaTypeNotAcceptableException(HttpServletRequest request, Exception e) {
         return ResponseEntity.badRequest().body(new ResponseApiError(e, request.getServletPath()));
     }
 

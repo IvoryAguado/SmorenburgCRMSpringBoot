@@ -78,7 +78,7 @@ public class AuthenticationRestController {
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<Object> HttpRequestMethodNotSupportedException(HttpServletRequest req, HttpMessageNotReadableException e) {
+    public ResponseEntity<Object> httpRequestMethodNotSupportedException(HttpServletRequest req, HttpMessageNotReadableException e) {
         return ResponseEntity.badRequest().body(new ResponseApiError(e, e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
     }
 }

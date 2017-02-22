@@ -89,14 +89,15 @@ public class Media {
 //        url=Paths.get(new StorageProperties().getLocation(),file.getOriginalFilename()).toUri();
         fileName = nextFileStringIdId();
         title = file.getOriginalFilename();
-        new File(localPath).renameTo(new File(Paths.get(new StorageProperties().getLocation(), fileName
+        boolean b = new File(localPath).renameTo(new File(Paths.get(new StorageProperties().getLocation(), fileName
                         + fileExtension
                 ).toUri().getPath())
         );
-        localPath = Paths.get(new StorageProperties().getLocation(), fileName
-                + fileExtension
-        ).toUri().getPath();
-
+        if (b) {
+            localPath = Paths.get(new StorageProperties().getLocation(), fileName
+                    + fileExtension
+            ).toUri().getPath();
+        }
     }
 
     private String nextFileStringIdId() {

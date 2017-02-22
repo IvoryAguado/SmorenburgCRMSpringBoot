@@ -80,6 +80,26 @@ $(function () {
         }
     }
 
+     function validateCurrentToken() {
+             $.ajax({
+                 url: "/api/auth/refresh",
+                 type: "GET",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 headers: createAuthorizationTokenHeader(),
+                  success: function(data, textStatus, xhr) {
+
+                     },
+                     complete: function(xhr, textStatus) {
+                         console.log(xhr.status);
+                         if(xhr.status==401)
+                            doLogout();
+                     },
+                      error: function(xhr, status, error){
+                      },
+             });
+         }
+
     function showUserInformation() {
         $.ajax({
             url: "/api/user",
@@ -173,6 +193,8 @@ $(function () {
 
     // INITIAL CALLS =============================================================
 
+    validateCurrentToken()
+
      if (getJwtToken()) {
         $login.hide();
         $loginForm.hide();
@@ -181,9 +203,5 @@ $(function () {
         showTokenInformation();
         showUserInformation();
     }
-     $('#loginErrorModal')
-     .modal("show")
-     .find(".modal-body")
-     .empty()
-     .html("<p>fgfgsgfsdgfsdfg</p>");
+
  });

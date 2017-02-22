@@ -25,7 +25,7 @@ class GlobalControllerExceptionHandlerextends {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ResponseApiError> ConstraintViolationException(HttpServletRequest request, ConstraintViolationException e) {
+    public ResponseEntity<ResponseApiError> constraintViolationException(HttpServletRequest request, ConstraintViolationException e) {
         StringBuilder localizedMessage = new StringBuilder();
         for (ConstraintViolation<?> next : e.getConstraintViolations()) {
             String propertyPath = next.getPropertyPath().toString().substring(0, 1).toUpperCase() + next.getPropertyPath().toString().substring(1);
@@ -38,13 +38,13 @@ class GlobalControllerExceptionHandlerextends {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ResponseApiError> ResourceNotFoundException(HttpServletRequest request, ResourceNotFoundException e) {
+    public ResponseEntity<ResponseApiError> resourceNotFoundException(HttpServletRequest request, ResourceNotFoundException e) {
         return ResponseEntity.badRequest().body(new ResponseApiError(e, request.getServletPath()));
     }
 
 
     @ExceptionHandler(TransactionSystemException.class)
-    public ResponseEntity<ResponseApiError> TransactionSystemException(HttpServletRequest request, TransactionSystemException e) {
+    public ResponseEntity<ResponseApiError> transactionSystemException(HttpServletRequest request, TransactionSystemException e) {
         StringBuilder localizedMessage = new StringBuilder();
         for (ConstraintViolation<?> next : ((ConstraintViolationException) e.getOriginalException().getCause()).getConstraintViolations()) {
             String propertyPath = next.getPropertyPath().toString().substring(0, 1).toUpperCase() + next.getPropertyPath().toString().substring(1);
