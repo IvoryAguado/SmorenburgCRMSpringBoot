@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
 <head th:replace="fragments/headTag :: headTag">
 <body>
 <div>
-    <header th:replace="fragments/header" th:remove="tag"></header>
+    <header th:replace="fragments/header" sec:authorize="isAuthenticated()" th:remove="tag"></header>
     <div th:replace="${contentView}" th:remove="tag"></div>
 </div>
 <div>
