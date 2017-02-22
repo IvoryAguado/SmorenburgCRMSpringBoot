@@ -69,8 +69,9 @@ public class MediaRestService {
         if (one == null)
             throw new ResourceNotFoundException("No Media were found when deleting with id: " + id);
 
-        new File(one.getLocalPath()).delete();
-        mediaRepository.delete(one);
+        boolean delete = new File(one.getLocalPath()).delete();
+        if (delete)
+            mediaRepository.delete(one);
 
         return ResponseEntity.ok(one);
     }
