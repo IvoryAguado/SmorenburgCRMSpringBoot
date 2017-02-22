@@ -174,12 +174,12 @@ public class WebController extends WebMvcConfigurerAdapter {
                                  HttpServletResponse response, Object handler) throws Exception {
             request.setAttribute("crmName", crmName);
             request.setAttribute("crmCopyRight", crmCopyRight);
+            request.setAttribute("crmCopyRightLink", crmCopyRightLink);
             request.setAttribute("crmEmailLink", crmEmailLink);
             request.setAttribute("crmRssLink", crmRssLink);
             request.setAttribute("crmInstagramLink", crmInstagramLink);
             request.setAttribute("crmFacebookLink", crmFacebookLink);
             request.setAttribute("crmTwitterLink", crmTwitterLink);
-            request.setAttribute("crmFacebookLink", crmFacebookLink);
 
             request.setAttribute("crmAddressRoad", crmAddressRoad);
             request.setAttribute("crmAddressCity", crmAddressCity);
