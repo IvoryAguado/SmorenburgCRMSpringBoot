@@ -21,9 +21,7 @@ import java.util.Random;
 public class Media {
 
     @Id
-    @Column(name = "ID", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "media_seq")
-    @SequenceGenerator(name = "media_seq", sequenceName = "media_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "FILENAME", length = 50, unique = true)
