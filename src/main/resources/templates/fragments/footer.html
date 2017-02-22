@@ -1,19 +1,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-     <!-- Footer -->
-     <section style="text-align:center" id="footer" th:fragment="footer">
-        <ul class="icons">
-            <li><a th:href="${crmTwitterLink}" class="fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a th:href="${crmFacebookLink}" class="fa-facebook"><span class="label">Facebook</span></a>
-            </li>
-            <li><a th:href="${crmInstagramLink}" class="fa-instagram"><span class="label">Instagram</span></a>
-            </li>
-            <li><a th:href="${crmRssLink}" class="fa-rss"><span class="label">RSS</span></a></li>
-            <li><a th:href="${crmEmailLink}" class="fa-envelope"><span class="label">Email</span></a>
-            </li>
-        </ul>
-         <p class="copyright">&copy; <a th:text="${crmCopyRight}" th:href="${crmCopyRightLink}"></a></p>
-    </section>
- </body>
+<!-- Footer -->
+<section style="text-align:center" id="footer" th:fragment="footer">
+    <ul class="icons">
+        <li><a th:href="${crmTwitterLink}" target="_blank" class="fa-twitter"><span class="label">Twitter</span></a>
+        </li>
+        <li><a th:href="${crmFacebookLink}" target="_blank" class="fa-facebook"><span class="label">Facebook</span></a>
+        </li>
+        <li><a th:href="${crmInstagramLink}" target="_blank" class="fa-instagram"><span
+                class="label">Instagram</span></a>
+        </li>
+        <li><a th:href="${crmRssLink}" target="_blank" class="fa-rss"><span class="label">RSS</span></a></li>
+        <li><a th:href="${crmEmailLink}" target="_blank" class="fa-envelope"><span class="label">Email</span></a>
+        </li>
+    </ul>
+    <p class="copyright">&copy; <a th:text="${crmCopyRight}" target="_blank" th:href="${crmCopyRightLink}"></a></p>
+</section>
+</body>
 </html>
 
