@@ -7,8 +7,8 @@
             <article class="post">
                 <header class="container">
                     <iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0"
-                            marginwidth="0"
-                            src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&q=15+Springfield+Way,+Hythe,+CT21+5SH&aq=t&sll=52.8382,-2.327815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
+                            marginwidth="0" marginwidth="0"
+                            th:src="@{|https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&q= ${crmAddressRoad},${crmAddressCity},${crmAddressPostalCode},${crmAddressCountry} &output=embed|}"></iframe>
 
                 </header>
 
@@ -61,13 +61,14 @@
 
                                     <div class="12u$">
                                         <address>
-                                            <strong>Road: </strong>15 Springfield Way<br>
-                                            <strong>City: </strong>Springfield<br>
-                                            <strong>Country: </strong>United Kingdon<br>
-                                            <strong>Postal Code: </strong> CT21 5SH<br>
-                                            <strong>Email: </strong>info@smorenburg.me<br>
-                                            <br>
-                                            <abbr title="Phone"><strong>Phone: </strong></abbr> 01234 567 890
+                                            <strong>Road: </strong><span th:text="${crmAddressRoad}"></span><br>
+                                            <strong>City: </strong><span th:text="${crmAddressCity}"></span><br>
+                                            <strong>Country: </strong><span th:text="${crmAddressCountry}"></span><br>
+                                            <strong>Postal Code: </strong><span
+                                                th:text="${crmAddressPostalCode}"></span><br>
+                                            <strong>Email: </strong><span th:text="${crmAddressEmail}"></span><br>
+                                            <strong>Phone: </strong><abbr th:text="${crmAddressPhone}"
+                                                                          title="Phone"></abbr>
                                             <br>
                                         </address>
                                     </div>

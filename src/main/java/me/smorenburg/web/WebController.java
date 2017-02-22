@@ -54,6 +54,24 @@ public class WebController extends WebMvcConfigurerAdapter {
     @Value("${crm.social.rss.link}")
     private String crmRssLink;
 
+    @Value("${crm.address.road}")
+    private String crmAddressRoad;
+
+    @Value("${crm.address.city}")
+    private String crmAddressCity;
+
+    @Value("${crm.address.country}")
+    private String crmAddressCountry;
+
+    @Value("${crm.address.postalcode}")
+    private String crmAddressPostalCode;
+
+    @Value("${crm.address.email}")
+    private String crmAddressEmail;
+
+    @Value("${crm.address.phone}")
+    private String crmAddressPhone;
+
     @Value("${crm.social.email.link}")
     private String crmEmailLink;
 
@@ -162,7 +180,13 @@ public class WebController extends WebMvcConfigurerAdapter {
             request.setAttribute("crmFacebookLink", crmFacebookLink);
             request.setAttribute("crmTwitterLink", crmTwitterLink);
             request.setAttribute("crmFacebookLink", crmFacebookLink);
-            request.setAttribute("crmCopyRightLink", crmCopyRightLink);
+
+            request.setAttribute("crmAddressRoad", crmAddressRoad);
+            request.setAttribute("crmAddressCity", crmAddressCity);
+            request.setAttribute("crmAddressCountry", crmAddressCountry);
+            request.setAttribute("crmAddressPostalCode", crmAddressPostalCode);
+            request.setAttribute("crmAddressEmail", crmAddressEmail);
+            request.setAttribute("crmAddressPhone", crmAddressPhone);
 
             return true;
         }
