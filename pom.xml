@@ -6,7 +6,7 @@
     <groupId>me.smorenburg</groupId>
     <artifactId>SmorenburgCRMSpringBoot</artifactId>
     <version>1.0.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>SmorenburgCRMSpringBoot</name>
     <description>Demo project for JWT with Spring Boot and Spring Security</description>
