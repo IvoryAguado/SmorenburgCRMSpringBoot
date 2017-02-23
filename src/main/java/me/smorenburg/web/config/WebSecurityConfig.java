@@ -20,7 +20,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.header.writers.CacheControlHeadersWriter;
 import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.header.writers.XContentTypeOptionsHeaderWriter;
@@ -107,21 +106,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/*").hasAnyRole("ROLE_ADMIN")
                 .antMatchers("/profile/*").hasAnyRole("ROLE_ADMIN")
                 .anyRequest().authenticated();
-//
-//        httpSecurity.formLogin()
-//                .loginPage("/**")
-//                .loginProcessingUrl("/api/auth")
-//                .defaultSuccessUrl("/index.html")
-//                .failureUrl("/index.html")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .permitAll(true);
+
+        httpSecurity.formLogin()
+                .loginPage("/**")
+                .loginProcessingUrl("/api/auth")
+                .defaultSuccessUrl("/index.html")
+                .failureUrl("/index.html")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll(true);
 
 //        httpSecurity.logout().logoutUrl("/signout").deleteCookies("JSESSIONID");
 
         // Custom JWT based security filter
         httpSecurity
-                .addFilterBefore(authenticationTokenFilterBean(), BasicAuthenticationFilter.class);
+                .addFilterBefore(authenticationTokenFilterBean(), JwtAuthenticationTokenFilter.class);
 
         // disable page caching
         httpSecurity.headers().cacheControl();
