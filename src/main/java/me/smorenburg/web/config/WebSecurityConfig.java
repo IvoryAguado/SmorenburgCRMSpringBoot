@@ -16,10 +16,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.RememberMeConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.header.writers.CacheControlHeadersWriter;
 import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.header.writers.XContentTypeOptionsHeaderWriter;
@@ -114,13 +116,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/index.html")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .permitAll(true);
+                .permitAll(true)
+                .init(httpSecurity);
+
+        RememberMeConfigurer<HttpSecurity> jwtToken = httpSecurity.rememberMe().rememberMeCookieName("jwtToken");
+
 
 //        httpSecurity.logout().logoutUrl("/signout").deleteCookies("JSESSIONID");
 
         // Custom JWT based security filter
         httpSecurity
-                .addFilterBefore(authenticationTokenFilterBean(), JwtAuthenticationTokenFilter.class);
+                .addFilterBefore(authenticationTokenFilterBean(), BasicAuthenticationFilter.class);
 
         // disable page caching
         httpSecurity.headers().cacheControl();
