@@ -88,6 +88,19 @@ public class ThymeleafAutoConfiguration {
 ////			}
 //        }
 
+        @Bean
+        public ITemplateResolver defaultTemplateResolver() {
+            ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
+//            resolver.setResourceResolver(thymeleafResourceResolver());
+            resolver.setPrefix(this.environment.getProperty("prefix", DEFAULT_PREFIX));
+            resolver.setSuffix(this.environment.getProperty("suffix", DEFAULT_SUFFIX));
+            resolver.setTemplateMode(this.environment.getProperty("mode", "HTML5"));
+            resolver.setCharacterEncoding(this.environment.getProperty("encoding",
+                    "UTF-8"));
+            resolver.setCacheable(this.environment.getProperty("cache", Boolean.class,
+                    true));
+            return resolver;
+        }
 
         @Bean
         protected SpringResourceResourceResolver thymeleafResourceResolver() {
