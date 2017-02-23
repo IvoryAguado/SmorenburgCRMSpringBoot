@@ -22,6 +22,7 @@ import org.thymeleaf.spring4.resourceresolver.SpringResourceResourceResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 import javax.servlet.Servlet;
 import java.util.Collection;
@@ -37,7 +38,7 @@ import java.util.Collections;
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class ThymeleafAutoConfiguration {
 
-    public static final String DEFAULT_PREFIX = "classpath:templates/";
+    public static final String DEFAULT_PREFIX = "classpath:/templates/";
 
     public static final String DEFAULT_SUFFIX = ".html";
 
@@ -90,8 +91,8 @@ public class ThymeleafAutoConfiguration {
 
         @Bean
         public ITemplateResolver defaultTemplateResolver() {
-            ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
-//            resolver.setResourceResolver(thymeleafResourceResolver());
+            TemplateResolver resolver = new TemplateResolver();
+            resolver.setResourceResolver(thymeleafResourceResolver());
             resolver.setPrefix(this.environment.getProperty("prefix", DEFAULT_PREFIX));
             resolver.setSuffix(this.environment.getProperty("suffix", DEFAULT_SUFFIX));
             resolver.setTemplateMode(this.environment.getProperty("mode", "HTML5"));
