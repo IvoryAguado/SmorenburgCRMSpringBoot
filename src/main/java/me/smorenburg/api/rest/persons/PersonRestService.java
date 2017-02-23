@@ -22,7 +22,7 @@ public class PersonRestService {
     @RequestMapping(path = "/persons/{id}", method = RequestMethod.GET)
     public ResponseEntity<Person> getPerson(@PathVariable("id") Long id) throws Exception {
         Person byId = personsRepository.findOne(id);
-//        if (byId == null)
+//        if (byId == null)sfewesf
 //            throw new ResourceNotFoundException("Person not found with id: " + id);
         return ResponseEntity.ok(byId);
     }
