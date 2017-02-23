@@ -3,7 +3,7 @@
 <head th:replace="fragments/headTag :: headTag">
 <body>
 <div>
-    <header th:replace="fragments/header" sec:authorize="hasRole('ROLE_USER')" th:remove="tag"></header>
+    <header th:replace="fragments/header" sec:authorize="isAuthenticated()" th:remove="tag"></header>
     <div th:replace="${contentView}" th:remove="tag"></div>
 </div>
 <div>
