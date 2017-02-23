@@ -24,7 +24,6 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.Servlet;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,9 +36,9 @@ import java.util.Collections;
 @Configuration
 @ConditionalOnClass(SpringTemplateEngine.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
-public class ThymeleafAutoConfiguration {//C:\Users\MR x\Desktop\SmorenburgCRMSpringBoot\src\main\resources
+public class ThymeleafAutoConfiguration {
 
-    public static final String DEFAULT_PREFIX = "classpath:/resources/templates/";
+    public static final String DEFAULT_PREFIX = "classpath:/templates/";
 
     public static final String DEFAULT_SUFFIX = ".html";
 
@@ -77,18 +76,18 @@ public class ThymeleafAutoConfiguration {//C:\Users\MR x\Desktop\SmorenburgCRMSp
                     "spring.thymeleaf.");
         }
 
-        @PostConstruct
-        public void checkTemplateLocationExists() {
-            Boolean checkTemplateLocation = this.environment.getProperty(
-                    "checkTemplateLocation", Boolean.class, true);
-//			if (checkTemplateLocation) {
-//				Resource resource = this.resourceLoader.getResource(this.environment
-//						.getProperty("prefix", DEFAULT_PREFIX));
-//				Assert.state(resource.exists(), "Cannot find template location: "
-//						+ resource + " (please add some templates "
-//						+ "or check your Thymeleaf configuration)");
-//			}
-        }
+//        @PostConstruct
+//        public void checkTemplateLocationExists() {
+//            Boolean checkTemplateLocation = this.environment.getProperty(
+//                    "checkTemplateLocation", Boolean.class, true);
+////			if (checkTemplateLocation) {
+////				Resource resource = this.resourceLoader.getResource(this.environment
+////						.getProperty("prefix", DEFAULT_PREFIX));
+////				Assert.state(resource.exists(), "Cannot find template location: "
+////						+ resource + " (please add some templates "
+////						+ "or check your Thymeleaf configuration)");
+////			}
+//        }
 
         @Bean
         public ITemplateResolver defaultTemplateResolver() {
