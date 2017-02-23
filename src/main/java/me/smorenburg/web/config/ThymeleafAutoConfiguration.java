@@ -20,8 +20,8 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.resourceresolver.SpringResourceResourceResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
 
 import javax.servlet.Servlet;
 import java.util.Collection;
@@ -37,19 +37,19 @@ import java.util.Collections;
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class ThymeleafAutoConfiguration {
 
-    public static final String DEFAULT_PREFIX = "classpath:/app/src/main/resources/templates/";
+    public static final String DEFAULT_PREFIX = "classpath:templates/";
 
     public static final String DEFAULT_SUFFIX = ".html";
 
-//    @Bean
-//    public ClassLoaderTemplateResolver templateResolver() {
-//        ClassLoaderTemplateResolver result = new ClassLoaderTemplateResolver();
-//        result.setPrefix("templates/");
-//        result.setSuffix(".html");
-//        result.setTemplateMode("HTML5");
-//        result.setOrder(1);
-//        return result;
-//    }
+    @Bean
+    public ClassLoaderTemplateResolver templateResolver() {
+        ClassLoaderTemplateResolver result = new ClassLoaderTemplateResolver();
+        result.setPrefix(DEFAULT_PREFIX);
+        result.setSuffix(DEFAULT_SUFFIX);
+        result.setTemplateMode("HTML5");
+        result.setOrder(1);
+        return result;
+    }
 
     @Configuration
     @ConditionalOnMissingBean(name = "defaultTemplateResolver")
@@ -88,19 +88,6 @@ public class ThymeleafAutoConfiguration {
 ////			}
 //        }
 
-        @Bean
-        public ITemplateResolver defaultTemplateResolver() {
-            TemplateResolver resolver = new TemplateResolver();
-            resolver.setResourceResolver(thymeleafResourceResolver());
-            resolver.setPrefix(this.environment.getProperty("prefix", DEFAULT_PREFIX));
-            resolver.setSuffix(this.environment.getProperty("suffix", DEFAULT_SUFFIX));
-            resolver.setTemplateMode(this.environment.getProperty("mode", "HTML5"));
-            resolver.setCharacterEncoding(this.environment.getProperty("encoding",
-                    "UTF-8"));
-            resolver.setCacheable(this.environment.getProperty("cache", Boolean.class,
-                    true));
-            return resolver;
-        }
 
         @Bean
         protected SpringResourceResourceResolver thymeleafResourceResolver() {
