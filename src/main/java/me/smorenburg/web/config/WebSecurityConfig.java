@@ -16,12 +16,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.RememberMeConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.security.web.header.writers.CacheControlHeadersWriter;
 import org.springframework.security.web.header.writers.HstsHeaderWriter;
 import org.springframework.security.web.header.writers.XContentTypeOptionsHeaderWriter;
@@ -78,10 +76,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 
-                // don't create session
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                // don't create session
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
 //                 allow anonymous resource requests
                 .antMatchers(
@@ -109,24 +107,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile/*").hasAnyRole("ROLE_ADMIN")
                 .anyRequest().authenticated();
 
-        httpSecurity.formLogin()
-                .loginPage("/**")
-                .loginProcessingUrl("/api/auth")
-                .defaultSuccessUrl("/index.html")
-                .failureUrl("/index.html")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll(true)
-                .init(httpSecurity);
+//        httpSecurity.formLogin()
+//                .loginPage("/**")
+//                .loginProcessingUrl("/api/auth")
+//                .defaultSuccessUrl("/index.html")
+//                .failureUrl("/index.html")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .permitAll(true)
+//                .init(httpSecurity);
 
-        RememberMeConfigurer<HttpSecurity> jwtToken = httpSecurity.rememberMe().rememberMeCookieName("jwtToken");
+//        RememberMeConfigurer<HttpSecurity> jwtToken = httpSecurity.rememberMe().rememberMeCookieName("jwtToken");
 
 
 //        httpSecurity.logout().logoutUrl("/signout").deleteCookies("JSESSIONID");
 
         // Custom JWT based security filter
         httpSecurity
-                .addFilterBefore(authenticationTokenFilterBean(), BasicAuthenticationFilter.class);
+                .addFilterBefore(authenticationTokenFilterBean(), SecurityContextPersistenceFilter.class);
 
         // disable page caching
         httpSecurity.headers().cacheControl();
