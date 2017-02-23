@@ -206,6 +206,8 @@ $(function () {
         $notLoggedIn.hide();
         showTokenInformation();
         showUserInformation();
-    }
+    }else{
+            $notLoggedIn.show();
+}
 
  });
