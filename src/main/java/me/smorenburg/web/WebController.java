@@ -122,26 +122,26 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public String projects(ExtendedModelMap model) {
-        model.addAttribute("contentView", "/pageviews/projects");
+        model.addAttribute("contentView", "pageviews/projects");
         return "index";
     }
 
     @RequestMapping(value = "/team", method = RequestMethod.GET)
     public String team(ExtendedModelMap model) {
-        model.addAttribute("contentView", "/pageviews/team");
+        model.addAttribute("contentView", "pageviews/team");
         return "index";
     }
 
     @RequestMapping(value = "/services", method = RequestMethod.GET)
     public String services(ExtendedModelMap model) {
-        model.addAttribute("contentView", "/pageviews/services");
+        model.addAttribute("contentView", "pageviews/services");
         return "index";
     }
 
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact(ExtendedModelMap model) {
-        model.addAttribute("contentView", "/pageviews/contact");
+        model.addAttribute("contentView", "pageviews/contact");
         return "index";
     }
 
@@ -158,7 +158,7 @@ public class WebController extends WebMvcConfigurerAdapter {
     public String exception(final Throwable throwable, final Model model) {
         String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
         model.addAttribute("errorMessage", errorMessage);
-        model.addAttribute("contentView", "/pageviews/error");
+        model.addAttribute("contentView", "pageviews/errorpage");
         return "error";
     }
 
