@@ -116,7 +116,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root(ExtendedModelMap model) {
-        model.addAttribute("contentView", "/pageviews/landing");
+        model.addAttribute("contentView", "pageviews/landing");
         return "index";
     }
 
