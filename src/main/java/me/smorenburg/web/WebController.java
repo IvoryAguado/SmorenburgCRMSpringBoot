@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -15,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.ThymeleafView;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -137,24 +132,7 @@ public class WebController extends WebMvcConfigurerAdapter {
         return "index";
     }
 
-    @Bean
-    public ClassLoaderTemplateResolver templateResolver() {
-        ClassLoaderTemplateResolver result = new ClassLoaderTemplateResolver();
-        result.setPrefix("templates/");
-        result.setSuffix(".html");
-        result.setTemplateMode("HTML");
-        result.setOrder(1);
-        return result;
-    }
 
-
-    @Bean
-    public ThymeleafViewResolver viewResolver(SpringTemplateEngine templateEngine) {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine);
-        viewResolver.setViewClass(ThymeleafView.class);
-        return viewResolver;
-    }
 
     @Override
     public void configureDefaultServletHandling(

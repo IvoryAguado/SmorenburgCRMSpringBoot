@@ -1,5 +1,4 @@
 <html xmlns:th="http://www.thymeleaf.org">
-
 <div th:fragment="contact">
     <div id="main">
         <div id="wrapper">
@@ -8,15 +7,14 @@
                 <header class="container">
                     <iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0"
                             marginwidth="0"
-                            th:src="@{|https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&q= ${crmAddressRoad},${crmAddressCity},${crmAddressPostalCode},${crmAddressCountry} &output=embed|}"></iframe>
+                            th:src="@{|https://maps.google.co.uk/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q= ${crmAddressRoad},${crmAddressCity},${crmAddressPostalCode},${crmAddressCountry} &amp;output=embed|}"></iframe>
 
                 </header>
-
                 <div>
                     <ul class="row actions fit">
                         <li>
                             <h3>Contact Form</h3>
-                            <br>
+                            <br/>
                             <form>
                                 <div class="row uniform">
                                     <div class="6u 12u$(xsmall)">
@@ -52,33 +50,30 @@
                             </form>
                         </li>
                         <li>
-                            <br>
-                            <br>
                             <h3>HeadQuarters</h3>
-                            <br>
+                            <br/>
                             <form>
                                 <div class="row uniform">
 
                                     <div class="12u$">
                                         <address>
-                                            <strong>Road: </strong><span th:text="${crmAddressRoad}"></span><br>
-                                            <strong>City: </strong><span th:text="${crmAddressCity}"></span><br>
-                                            <strong>Country: </strong><span th:text="${crmAddressCountry}"></span><br>
+                                            <strong>Road: </strong><span th:text="${crmAddressRoad}"></span><br/>
+                                            <strong>City: </strong><span th:text="${crmAddressCity}"></span><br/>
+                                            <strong>Country: </strong><span th:text="${crmAddressCountry}"></span><br/>
                                             <strong>Postal Code: </strong><span
-                                                th:text="${crmAddressPostalCode}"></span><br>
-                                            <strong>Email: </strong><span th:text="${crmAddressEmail}"></span><br>
+                                                th:text="${crmAddressPostalCode}"></span><br/>
+                                            <strong>Email: </strong><span th:text="${crmAddressEmail}"></span><br/>
                                             <strong>Phone: </strong><abbr th:text="${crmAddressPhone}"
-                                                                          title="Phone"></abbr>
-                                            <br>
+                                                                          title="Phone"></abbr><br/>
                                         </address>
                                     </div>
                                 </div>
                             </form>
                         </li>
                     </ul>
-                    <br><br>
                 </div>
             </article>
         </div>
     </div>
 </div>
+</html>

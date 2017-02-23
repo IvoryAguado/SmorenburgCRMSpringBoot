@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
-<head th:replace="fragments/headTag :: headTag">
+<head th:replace="fragments/headTag :: headTag"></head>
 <body>
 <div>
     <header th:replace="fragments/header" sec:authorize="isAuthenticated()" th:remove="tag"></header>

@@ -11,10 +11,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.web.servlet.ViewResolver;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @SpringBootApplication
 @PropertySources({
@@ -32,20 +28,7 @@ public class SmorenburgCRMSpringBootApplication extends SpringBootServletInitial
         return application.sources(SmorenburgCRMSpringBootApplication.class);
     }
 
-    @Bean
-    public ViewResolver viewResolver() {
-        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-        templateResolver.setTemplateMode("XHTML");
-        templateResolver.setPrefix("templates/");
-        templateResolver.setSuffix(".html");
 
-        SpringTemplateEngine engine = new SpringTemplateEngine();
-        engine.setTemplateResolver(templateResolver);
-
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(engine);
-        return viewResolver;
-    }
 
     @Bean
     CommandLineRunner init(StorageService storageService) {
