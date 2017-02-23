@@ -107,15 +107,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile/*").hasAnyRole("ROLE_ADMIN")
                 .anyRequest().authenticated();
 
-//        httpSecurity.formLogin()
-//                .loginPage("/**")
-//                .loginProcessingUrl("/api/auth")
-//                .defaultSuccessUrl("/index.html")
-//                .failureUrl("/index.html")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .permitAll(true)
-//                .init(httpSecurity);
+        httpSecurity.formLogin()
+                .loginPage("/**")
+                .loginProcessingUrl("/api/auth")
+                .defaultSuccessUrl("/index.html")
+                .failureUrl("/index.html")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll(true);
+
 
 //        RememberMeConfigurer<HttpSecurity> jwtToken = httpSecurity.rememberMe().rememberMeCookieName("jwtToken");
 

@@ -41,6 +41,7 @@ $(function () {
                   showUserInformation();
                   $loginForm.hide();
                   $signUp.hide();
+                  window.location.reload(); // This is not jQuery but simple plain ol' JS
               },
               error: function (jqXHR, textStatus, errorThrown) {
 //                  if (jqXHR.status === 401) {
@@ -73,6 +74,7 @@ $(function () {
             .empty();
         $notLoggedIn.show();
         $signUp.show();
+        window.location.reload(); // This is not jQuery but simple plain ol' JS
     }
 
     function createAuthorizationTokenHeader() {
