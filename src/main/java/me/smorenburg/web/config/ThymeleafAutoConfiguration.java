@@ -20,7 +20,6 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.resourceresolver.SpringResourceResourceResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
@@ -42,15 +41,15 @@ public class ThymeleafAutoConfiguration {
 
     public static final String DEFAULT_SUFFIX = ".html";
 
-    @Bean
-    public ClassLoaderTemplateResolver templateResolver() {
-        ClassLoaderTemplateResolver result = new ClassLoaderTemplateResolver();
-        result.setPrefix("templates/");
-        result.setSuffix(".html");
-        result.setTemplateMode("HTML5");
-        result.setOrder(1);
-        return result;
-    }
+//    @Bean
+//    public ClassLoaderTemplateResolver templateResolver() {
+//        ClassLoaderTemplateResolver result = new ClassLoaderTemplateResolver();
+//        result.setPrefix("templates/");
+//        result.setSuffix(".html");
+//        result.setTemplateMode("HTML5");
+//        result.setOrder(1);
+//        return result;
+//    }
 
     @Configuration
     @ConditionalOnMissingBean(name = "defaultTemplateResolver")
