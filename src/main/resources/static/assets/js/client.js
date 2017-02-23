@@ -28,7 +28,7 @@ $(function () {
 
    function doLogin(loginData) {
           $.ajax({
-              url: "/auth",
+              url: "/api/auth",
               type: "POST",
               data: JSON.stringify(loginData),
               contentType: "application/json; charset=utf-8",
