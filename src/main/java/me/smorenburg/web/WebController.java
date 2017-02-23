@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.resource.WebJarsResourceResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @EnableWebMvc
@@ -30,7 +33,9 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/resources/",
-            "classpath:/static/"};
+            "classpath:/static/",
+            "classpath:webjars/"
+    };
 
     @Value("${crm.name}")
     private String crmName;
@@ -90,7 +95,10 @@ public class WebController extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
         registry.addResourceHandler("/**").addResourceLocations(
-                CLASSPATH_RESOURCE_LOCATIONS);
+                CLASSPATH_RESOURCE_LOCATIONS).setCacheControl(
+                CacheControl.maxAge(30L, TimeUnit.DAYS).cachePublic())
+                .resourceChain(true)
+                .addResolver(new WebJarsResourceResolver());
     }
 
     @Override
@@ -136,7 +144,6 @@ public class WebController extends WebMvcConfigurerAdapter {
         model.addAttribute("contentView", "/pageviews/contact");
         return "index";
     }
-
 
 
     @Override

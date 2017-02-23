@@ -26,35 +26,37 @@ $(function () {
         localStorage.removeItem(TOKEN_KEY);
     }
 
-    function doLogin(loginData) {
-        $.ajax({
-            url: "/api/auth",
-            type: "POST",
-            data: JSON.stringify(loginData),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, textStatus, jqXHR) {
-                setJwtToken(data.token);
-                $login.hide();
-                $loginForm.hide();
-                $notLoggedIn.hide();
-                showTokenInformation()
-                showUserInformation();
-                $signUp.hide();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                if (jqXHR.status === 401) {
-                    $('#loginErrorModal')
-                        .modal("show")
-                        .find(".modal-body")
-                        .empty()
-                        .html("<p>" + jqXHR.responseJSON.exception + "</p>");
-                } else {
-                    throw new Error("an unexpected error occured: " + errorThrown);
-                }
-            }
-        });
-    }
+   function doLogin(loginData) {
+          $.ajax({
+              url: "/auth",
+              type: "POST",
+              data: JSON.stringify(loginData),
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              success: function (data, textStatus, jqXHR) {
+                  setJwtToken(data.token);
+                  $login.hide();
+                  $notLoggedIn.hide();
+                  showTokenInformation()
+                  showUserInformation();
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.status === 401) {
+                      $('#loginErrorModal')
+                          .modal("show")
+                          .find(".modal-body")
+                          .empty()
+                          .html("<p>" + errorThrown + "</p>");
+                  } else {
+                      throw new Error( errorThrown);
+                  }
+              }
+          });
+      }
+
+    $('loginErrorModal').modal('show', '.modal', function () {
+      $(this).removeData('bs.modal');
+    });
 
     function doLogout() {
         removeJwtToken();
