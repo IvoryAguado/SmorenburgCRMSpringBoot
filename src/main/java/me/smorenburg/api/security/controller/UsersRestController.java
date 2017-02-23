@@ -4,8 +4,6 @@ package me.smorenburg.api.security.controller;
 import me.smorenburg.api.security.model.ResponseApiError;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,10 +94,10 @@ public class UsersRestController {
         return request;
     }
 
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ResponseApiError> httpMediaTypeNotAcceptableException(HttpServletRequest request, Exception e) {
-        return ResponseEntity.badRequest().body(new ResponseApiError(e, request.getServletPath()));
-    }
+//
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ResponseApiError> httpMediaTypeNotAcceptableException(HttpServletRequest request, Exception e) {
+//        return ResponseEntity.badRequest().body(new ResponseApiError(e, request.getServletPath()));
+//    }
 
 }

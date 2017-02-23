@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -92,7 +96,7 @@ public class WebController extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
-//        registry.addViewController("/results").setViewName("results");
+        registry.addViewController("/error").setViewName("error");
 //        registry.addViewController("/login").setViewName("login");
 //        registry.addViewController("/form").setViewName("form");
     }
@@ -126,6 +130,7 @@ public class WebController extends WebMvcConfigurerAdapter {
         return "index";
     }
 
+
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact(ExtendedModelMap model) {
         model.addAttribute("contentView", "/pageviews/contact");
@@ -139,6 +144,15 @@ public class WebController extends WebMvcConfigurerAdapter {
             DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
 
+    }
+
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String exception(final Throwable throwable, final Model model) {
+        String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("contentView", "/pageviews/error");
+        return "error";
     }
 
     @Component
@@ -182,5 +196,4 @@ public class WebController extends WebMvcConfigurerAdapter {
         }
 
     }
-
 }

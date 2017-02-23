@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="errorpage">
+    <div id="main">
+        <div id="wrapper">
+            <!-- Post -->
+            <article class="post">
+                <section>
+                    <header class="container">
+                        <div class="title">
+                            <h2><a href="#"> Error Page </a></h2>
+                            <p>Sorry you we got you here :)</p>
+                        </div>
+                    </header>
+                    <div class="row actions fit">
+                        <h4 th:utext="${errorMessage}">Error java.lang.NullPointerException</h4>
+                        <p><a href="/" th:href="@{/}">Back to Home Page</a></p>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+</div>
+</html>

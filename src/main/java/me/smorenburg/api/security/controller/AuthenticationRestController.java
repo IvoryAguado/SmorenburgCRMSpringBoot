@@ -3,13 +3,11 @@ package me.smorenburg.api.security.controller;
 import me.smorenburg.api.security.JwtAuthenticationRequest;
 import me.smorenburg.api.security.JwtTokenUtil;
 import me.smorenburg.api.security.JwtUser;
-import me.smorenburg.api.security.model.ResponseApiError;
 import me.smorenburg.api.security.service.JwtAuthenticationResponse;
 import me.smorenburg.api.security.service.JwtUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,8 +15,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -72,13 +72,13 @@ public class AuthenticationRestController {
         }
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<Object> rulesForHttpMessageNotReadableException(HttpServletRequest req, HttpMessageNotReadableException e) {
-        return ResponseEntity.badRequest().body(new ResponseApiError(e, e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
-    }
-
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<Object> httpRequestMethodNotSupportedException(HttpServletRequest req, HttpMessageNotReadableException e) {
-        return ResponseEntity.badRequest().body(new ResponseApiError(e, e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
-    }
+//    @ExceptionHandler(HttpMessageNotReadableException.class)
+//    public ResponseEntity<Object> rulesForHttpMessageNotReadableException(HttpServletRequest req, HttpMessageNotReadableException e) {
+//        return ResponseEntity.badRequest().body(new ResponseApiError(e, e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
+//    }
+//
+//    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+//    public ResponseEntity<Object> httpRequestMethodNotSupportedException(HttpServletRequest req, HttpMessageNotReadableException e) {
+//        return ResponseEntity.badRequest().body(new ResponseApiError(e, e.getMessage().substring(0, e.getMessage().indexOf(":")), req.getServletPath()));
+//    }
 }

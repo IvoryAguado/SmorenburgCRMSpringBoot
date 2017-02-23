@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headTag :: headTag"></head>
+<body>
+<div>
+    <header th:replace="fragments/header" th:remove="tag"></header>
+    <a href="#" class="image featured"><img src="images/pic01.jpg" alt=""/></a>
+
+    <div th:replace="pageviews/errorpage" th:remove="tag"></div>
+</div>
+<div>
+    <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+</body>
+</html>
