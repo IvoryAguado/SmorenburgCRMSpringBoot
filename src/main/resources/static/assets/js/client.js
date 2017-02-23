@@ -43,15 +43,15 @@ $(function () {
                   $signUp.hide();
               },
               error: function (jqXHR, textStatus, errorThrown) {
-                  if (jqXHR.status === 401) {
+//                  if (jqXHR.status === 401) {
                       $('#loginErrorModal')
                           .modal("show")
                           .find(".modal-body")
                           .empty()
-                          .html("<span  style='color:red'>Incorrect Email or password</span>");
-                  } else {
-                      throw new Error("an unexpected error occured: " + errorThrown);
-                  }
+                          .html("<span  style='color:red'>Incorrect Email or password</span> "+errorThrown);
+//                  } else {
+//                      throw new Error("an unexpected error occured: " + errorThrown);
+//                  }
               }
           });
       }
