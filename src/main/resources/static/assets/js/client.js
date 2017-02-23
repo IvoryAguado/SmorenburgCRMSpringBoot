@@ -46,9 +46,9 @@ $(function () {
                           .modal("show")
                           .find(".modal-body")
                           .empty()
-                          .html("<p>" + errorThrown + "</p>");
+                          .html("<span  style='color:red'>Incorrect Email or password</span>");
                   } else {
-                      throw new Error( errorThrown);
+                      throw new Error("an unexpected error occured: " + errorThrown);
                   }
               }
           });
