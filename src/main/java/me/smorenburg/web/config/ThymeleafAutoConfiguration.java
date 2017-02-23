@@ -38,7 +38,7 @@ import java.util.Collections;
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
 public class ThymeleafAutoConfiguration {
 
-    public static final String DEFAULT_PREFIX = "classpath:/resources/templates/";
+    public static final String DEFAULT_PREFIX = "templates/";
 
     public static final String DEFAULT_SUFFIX = ".html";
 
