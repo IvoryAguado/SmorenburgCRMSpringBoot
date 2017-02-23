@@ -39,6 +39,8 @@ $(function () {
                   $notLoggedIn.hide();
                   showTokenInformation()
                   showUserInformation();
+                  $loginForm.hide();
+                  $signUp.hide();
               },
               error: function (jqXHR, textStatus, errorThrown) {
                   if (jqXHR.status === 401) {
