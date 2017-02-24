@@ -102,6 +102,7 @@ $(function () {
                             doLogout();
                      },
                       error: function(xhr, status, error){
+                            doLogout();
                       },
              });
          }
