@@ -99,10 +99,10 @@ $(function () {
                      complete: function(xhr, textStatus) {
                          console.log(xhr.status);
                          if(xhr.status==401)
-                            doLogout();
+                            removeJwtToken();
                      },
                       error: function(xhr, status, error){
-                            doLogout();
+                            removeJwtToken();
                       },
              });
          }
