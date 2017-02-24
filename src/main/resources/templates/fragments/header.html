@@ -10,7 +10,7 @@
                 <li><a href="#" th:href="@{/projects}">Projects</a></li>
                 <li><a href="#" th:href="@{/team}">Team</a></li>
                 <li><a href="#" th:href="@{/contact}">Contact</a></li>
-                <li><a href="#" th:href="@{/user}" sec:authorize="isAuthenticated()">Profile</a></li>
+                <li><a href="#" th:href="@{/userprofile}" sec:authorize="isAuthenticated()">Profile</a></li>
                 <li><a href="#" th:href="@{/admin}" sec:authorize="hasRole('ROLE_ADMIN')">Admin</a></li>
             </ul>
         </nav>

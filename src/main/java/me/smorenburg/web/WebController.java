@@ -138,6 +138,11 @@ public class WebController extends WebMvcConfigurerAdapter {
         return "index";
     }
 
+    @RequestMapping(value = "/userprofile", method = RequestMethod.GET)
+    public String profile(ExtendedModelMap model) {
+        model.addAttribute("contentView", "pageviews/userprofile");
+        return "index";
+    }
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact(ExtendedModelMap model) {
