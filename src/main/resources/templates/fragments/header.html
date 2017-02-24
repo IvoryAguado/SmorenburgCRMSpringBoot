@@ -59,7 +59,7 @@
                         <p>Feugiat tempus veroeros dolor</p>
                     </a>
                 </li>
-                <li id="loginForm">
+                <li sec:authorize="isAnonymous()" id="loginForm">
                     <form>
                         <div>
                             <h3>LOGIN</h3>
@@ -85,7 +85,7 @@
                     </div><!-- /.modal -->
                 </li>
                 <li>
-                    <div id="userInfo">
+                    <div sec:authorize="isAuthenticated()" id="userInfo">
                         <div class="panel panel-default">
                             <div class="alert alert-info text-hidden" id="loggedIn"></div>
                             <div class="panel-body">
@@ -97,7 +97,7 @@
             </ul>
 
         </section>
-        <section id="signUp">
+        <section sec:authorize="isAnonymous()" id="signUp">
             <ul class="links">
                 <li>
                     <div>

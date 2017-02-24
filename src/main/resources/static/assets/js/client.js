@@ -7,11 +7,11 @@ $(function () {
     var TOKEN_KEY = "jwtToken"
     var $notLoggedIn = $("#notLoggedIn");
     var $loginForm = $("#loginForm");
-    var $loggedIn = $("#loggedIn").hide();
+    var $loggedIn = $("#loggedIn");
     var $response = $("#response");
     var $login = $("#login");
     var $signUp = $("#signUp");
-    var $userInfo = $("#userInfo").hide();
+    var $userInfo = $("#userInfo");
 
     // FUNCTIONS =============================================================
     function getJwtToken() {
@@ -33,14 +33,12 @@ $(function () {
               data: JSON.stringify(loginData),
               contentType: "application/json; charset=utf-8",
               dataType: "json",
+              beforeSend: function (xhr) {
+                  xhr.setRequestHeader ("Authorization", "Basic " + btoa(loginData.username + ":" + loginData.password));
+              },
               success: function (data, textStatus, jqXHR) {
                   setJwtToken(data.token);
-                  $login.hide();
-                  $notLoggedIn.hide();
-                  showTokenInformation()
-                  showUserInformation();
-                  $loginForm.hide();
-                  $signUp.hide();
+
                   window.location.reload(); // This is not jQuery but simple plain ol' JS
               },
               error: function (jqXHR, textStatus, errorThrown) {
@@ -63,18 +61,17 @@ $(function () {
 
     function doLogout() {
         removeJwtToken();
-        $login.show();
-        $loginForm.show();
+
         $userInfo
             .hide()
             .find("#userInfoBody").empty();
-        $loggedIn
-            .hide()
-            .attr("title", "")
-            .empty();
-        $notLoggedIn.show();
-        $signUp.show();
+//        $loggedIn
+//            .hide()
+//            .attr("title", "")
+//            .empty();
+
         window.location.reload(); // This is not jQuery but simple plain ol' JS
+
     }
 
     function createAuthorizationTokenHeader() {
@@ -203,10 +200,10 @@ $(function () {
     validateCurrentToken()
 
      if (getJwtToken()) {
-        $login.hide();
-        $loginForm.hide();
-        $signUp.hide();
-        $notLoggedIn.hide();
+//        $login.hide();
+//        $loginForm.hide();
+//        $signUp.hide();
+//        $notLoggedIn.hide();
         showTokenInformation();
         showUserInformation();
     }
